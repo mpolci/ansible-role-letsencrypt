@@ -1,0 +1,2 @@
+domain_name: example.com
+csr_subj: "/C=IT/O=Acme/OU=Acme/emailAddress=www@acme.com/CN={{ domain_name }}"
