@@ -24,6 +24,8 @@
     account_key: /etc/ssl/letsencrypt/account.key
     csr: /etc/ssl/letsencrypt/{{ domain_name }}.csr
     dest: /etc/ssl/certs/{{ domain_name }}.crt
+    acme_directory: {{ acme_directory_prod }}
+    cert_days: {{ cert_days }}
   register: domain_challenge
 
 - name: perform the necessary steps to fulfill the challenge
@@ -38,4 +40,6 @@
     account_key: /etc/ssl/letsencrypt/account.key
     csr: /etc/ssl/letsencrypt/{{ domain_name }}.csr
     dest: /etc/ssl/certs/{{ domain_name }}.crt
+    acme_directory: {{ acme_directory_prod }}
+    cert_days: {{ cert_days }}
     data: "{{ domain_challenge }}"

@@ -1,2 +1,5 @@
-domain_name: example.com
-csr_subj: "/C=IT/O=Acme/OU=Acme/emailAddress=www@acme.com/CN={{ domain_name }}"
+domain_name: benni.ml
+csr_subj: "/C=IT/O=Acme/OU=Acme/emailAddress=ilbenni@gmail.com/CN={{ domain_name }}"
+acme_directory_prod: "https://acme-v01.api.letsencrypt.org/directory"
+acme_directory_test: "https://acme-staging.api.letsencrypt.org/directory"
+cert_days: 10
