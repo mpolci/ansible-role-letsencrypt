@@ -13,33 +13,8 @@
 - name: generate account key for letsencrypt
   command: openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:4096 -out /etc/ssl/letsencrypt/account.key creates=/etc/ssl/letsencrypt/account.key
 
-- name: generate domain key
-  command: openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:2048 -out /etc/ssl/private/{{ domain_name }}.key creates=/etc/ssl/private/{{ domain_name }}.key
-
-- name: generate csr
-  command: openssl req -new -sha256 -key /etc/ssl/private/{{ domain_name }}.key -subj "{{ csr_subj }}" -out /etc/ssl/letsencrypt/{{ domain_name }}.csr creates=/etc/ssl/letsencrypt/{{ domain_name }}.csr
-
-- name: letsencrypt firts steps
-  letsencrypt:
-    account_key: /etc/ssl/letsencrypt/account.key
-    csr: /etc/ssl/letsencrypt/{{ domain_name }}.csr
-    dest: /etc/ssl/certs/{{ domain_name }}.crt
-    acme_directory: "{{ acme_directory_prod }}"
-    remaining_days: "{{ cert_days }}"
-  register: domain_challenge
-
-- name: perform the necessary steps to fulfill the challenge
-  copy:
-    dest: "/var/www/html/{{ item['value']['http-01']['resource'] }}"
-    content: "{{ item['value']['http-01']['resource_value'] }}"
-  when: domain_challenge|changed
-  with_dict: "{{ domain_challenge['challenge_data'] }}"
-
-- name: letsencrypt second steps
-  letsencrypt:
-    account_key: /etc/ssl/letsencrypt/account.key
-    csr: /etc/ssl/letsencrypt/{{ domain_name }}.csr
-    dest: /etc/ssl/certs/{{ domain_name }}.crt
-    acme_directory: "{{ acme_directory_prod }}"
-    remaining_days: "{{ cert_days }}"
-    data: "{{ domain_challenge }}"
+- name: loop for cert
+  include: cert.yml
+  with_items: '{{domain_name}}'
+  loop_control:
+    loop_var: domain

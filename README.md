@@ -11,6 +11,5 @@ These variables could be configured:
 
 - **domain_name:**:
 - **csr_subj**:
-- **acme_directory_prod:**: The ACME directory to use for production environment
-- **acme_directory_test:**: The ACME directory to use for test environment
+- **acme_directory:**: The ACME directory
 - **cert_days:**: 10 before the certificate will be renewed
