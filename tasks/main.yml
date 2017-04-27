@@ -10,8 +10,12 @@
     path: /var/www/html/.well-known/acme-challenge/
     state: directory
 
-- name: generate account key for letsencrypt
+- name: Generate account key for letsencrypt
   command: openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:4096 -out /etc/ssl/letsencrypt/account.key creates=/etc/ssl/letsencrypt/account.key
+
+- name: Set letsencrypt envirnoment
+  set_fact:
+    acme_directory: "{% if acme_env == 'prod' %} {{acme_directory_prod}} {% else %} {{acme_directory_test}} {% endif %}"
 
 - name: loop for cert
   include: cert.yml

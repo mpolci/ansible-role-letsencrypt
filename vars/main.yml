@@ -1,15 +1,6 @@
-
-
-domain_name:
-  - digw-monitor.undo.it
-  - digw-insight.undo.it
-
-csr_subj: "/C=IT/O=Acme/OU=Acme/emailAddress=ilbenni@gmail.com/CN={{ domain }}"
-
 #Select test or production api
-#acme_directory_prod: "https://acme-v01.api.letsencrypt.org/directory"
-#acme_directory_test: "https://acme-staging.api.letsencrypt.org/directory"
 
-acme_directory: "https://acme-staging.api.letsencrypt.org/directory"
+acme_directory_prod: "https://acme-v01.api.letsencrypt.org/directory"
+acme_directory_test: "https://acme-staging.api.letsencrypt.org/directory"
 
 cert_days: 10
