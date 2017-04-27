@@ -3,8 +3,14 @@
 domain_name:
   - digw-monitor.undo.it
   - digw-insight.undo.it
+  - digw-log.undo.it
 
-csr_subj: "/C=IT/O=Acme/OU=Acme/emailAddress=ilbenni@gmail.com/CN={{ domain }}"
+
+country: "IT"
+organization: "Acme Inc"
+email: admin@{{ domain }}
+
+
 
 #Select test or production api
 #acme_directory_prod: "https://acme-v01.api.letsencrypt.org/directory"

@@ -2,7 +2,16 @@
   command: openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:2048 -out /etc/ssl/private/{{ domain }}.key creates=/etc/ssl/private/{{ domain }}.key
 
 - name: generate csr
-  command: openssl req -new -sha256 -key /etc/ssl/private/{{ domain }}.key -subj "{{ csr_subj }}" -out /etc/ssl/letsencrypt/{{ domain }}.csr creates=/etc/ssl/letsencrypt/{{ domain }}.csr
+  openssl_csr:
+    path: "/etc/ssl/letsencrypt/{{ domain }}.csr"
+    privatekey_path: "/etc/ssl/private/{{ domain }}.key"
+    countryName: "{{ country }}"
+    organizationName: "{{ organization }}"
+    emailAddress: "{{ email }}"
+    commonName: "{{ domain }}"
+    subjectAltName: "DNS:www.{{ domain }}"
+
+
 
 - name: letsencrypt firts steps
   letsencrypt:
