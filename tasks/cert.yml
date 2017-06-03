@@ -15,7 +15,7 @@
 
 - name: perform the necessary steps to fulfill the challenge
   copy:
-    dest: "/var/www/html/{{ item['value']['http-01']['resource'] }}"
+    dest: "{{ wwwroot }}/{{ item['value']['http-01']['resource'] }}"
     content: "{{ item['value']['http-01']['resource_value'] }}"
   when: domain_challenge|changed
   with_dict: "{{ domain_challenge['challenge_data'] }}"

@@ -7,7 +7,7 @@
 
 - name: Create letsencrypt acme-challenge directory
   file:
-    path: /var/www/html/.well-known/acme-challenge/
+    path: "{{ wwwroot }}/.well-known/acme-challenge/"
     state: directory
 
 - name: Generate account key for letsencrypt
