@@ -18,7 +18,7 @@
     acme_directory: "{% if acme_env == 'prod' %} {{acme_directory_prod}} {% else %} {{acme_directory_test}} {% endif %}"
 
 - name: loop for cert
-  include: cert.yml
+  include_tasks: cert.yml
   with_items: '{{domain_name}}'
   loop_control:
     loop_var: domain
